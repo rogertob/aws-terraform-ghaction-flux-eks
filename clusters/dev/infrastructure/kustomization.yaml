@@ -1,14 +1,4 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: infrastructure
-  namespace: flux-system
-spec:
-  interval: 10m
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  path: ./clusters/dev/infrastructure
-  prune: true
-  wait: true
-  timeout: 5m
+resources:
+  - aws-load-balancer-controller
