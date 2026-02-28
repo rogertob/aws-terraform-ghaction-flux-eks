@@ -127,9 +127,9 @@ resource "aws_iam_policy" "karpenter_controller" {
         Resource = "*"
       },
       {
-        Sid    = "AllowEC2TerminateKarpenterNodes"
-        Effect = "Allow"
-        Action = ["ec2:TerminateInstances"]
+        Sid      = "AllowEC2TerminateKarpenterNodes"
+        Effect   = "Allow"
+        Action   = ["ec2:TerminateInstances"]
         Resource = "*"
         Condition = {
           StringLike = { "ec2:ResourceTag/karpenter.sh/nodepool" = "*" }
