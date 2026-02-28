@@ -122,6 +122,18 @@ module "addon_ebs_csi" {
     service_account = "ebs-csi-controller-sa"
     role_arn        = aws_iam_role.ebs_csi.arn
   }]
+  configuration_values = jsonencode({
+    controller = {
+      replicaCount = 1
+      tolerations = [{
+        key      = "CriticalAddonsOnly"
+        operator = "Exists"
+      }]
+      nodeSelector = {
+        "node-role" = "system"
+      }
+    }
+  })
   tags       = local.tags
   depends_on = [module.eks, module.addon_pod_identity_agent]
 }
