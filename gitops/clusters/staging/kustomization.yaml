@@ -4,5 +4,6 @@ resources:
   - flux-system
   - cluster-vars.yaml
   - infrastructure.yaml
+  - monitoring.yaml
   - config.yaml
   - apps.yaml

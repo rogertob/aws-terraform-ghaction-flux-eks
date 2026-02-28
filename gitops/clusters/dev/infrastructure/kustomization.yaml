@@ -4,9 +4,4 @@ resources:
   - ../../../base/infrastructure/aws-load-balancer-controller
   - ../../../base/infrastructure/external-secrets
   - ../../../base/infrastructure/karpenter
-  - ../../../base/infrastructure/loki
-  - ../../../base/infrastructure/prometheus
-  - ../../../base/infrastructure/promtail
   - ../../../base/infrastructure/storage
-patches:
-  - path: patches/prometheus-values.yaml

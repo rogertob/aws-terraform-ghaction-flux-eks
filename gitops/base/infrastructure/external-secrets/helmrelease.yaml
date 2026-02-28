@@ -24,3 +24,24 @@ spec:
     serviceAccount:
       create: true
       name: external-secrets
+
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+
+    nodeSelector:
+      node-role: system
+
+    webhook:
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+      nodeSelector:
+        node-role: system
+
+    certController:
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+      nodeSelector:
+        node-role: system
