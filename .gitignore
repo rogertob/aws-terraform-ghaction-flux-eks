@@ -43,6 +43,9 @@ kubeconfig.*
 *.swo
 *~
 
+# Docs
+docs/
+
 # Misc
 *.log
 *.tmp
