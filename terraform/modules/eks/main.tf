@@ -45,12 +45,20 @@ resource "aws_eks_cluster" "this" {
     resources = ["secrets"]
   }
 
+  access_config {
+    authentication_mode = "API_AND_CONFIG_MAP"
+  }
+
   enabled_cluster_log_types = var.cluster_log_types
 
   depends_on = [
     aws_iam_role_policy_attachment.cluster_policy,
     aws_cloudwatch_log_group.cluster,
   ]
+
+  lifecycle {
+    ignore_changes = [access_config]
+  }
 
   tags = merge(var.tags, {
     Name = var.cluster_name
