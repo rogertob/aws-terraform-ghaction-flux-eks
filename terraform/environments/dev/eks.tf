@@ -21,6 +21,7 @@ module "eks" {
       max_size       = 3
       desired_size   = 0
       disk_size      = 20
+      max_pods       = 110
       labels = {
         "node-role" = "system"
       }
@@ -75,6 +76,12 @@ module "addon_vpc_cni" {
     service_account = "aws-node"
     role_arn        = aws_iam_role.vpc_cni.arn
   }]
+  configuration_values = jsonencode({
+    env = {
+      ENABLE_PREFIX_DELEGATION = "true"
+      WARM_PREFIX_TARGET       = "1"
+    }
+  })
   tags       = local.tags
   depends_on = [module.eks, module.addon_pod_identity_agent]
 }

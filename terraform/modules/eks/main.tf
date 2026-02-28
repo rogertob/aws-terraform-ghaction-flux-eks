@@ -73,9 +73,28 @@ resource "aws_launch_template" "nodes" {
 
   name_prefix = "${var.cluster_name}-${each.key}-"
 
+  # launch template. EKS merges with their own bootstrap. 
+  user_data = each.value.max_pods != null ? base64encode(<<-EOT
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="==BOUNDARY=="
+
+    --==BOUNDARY==
+    Content-Type: application/node.eks.aws
+
+    ---
+    apiVersion: node.eks.aws/v1alpha1
+    kind: NodeConfig
+    spec:
+      kubelet:
+        config:
+          maxPods: ${each.value.max_pods}
+    --==BOUNDARY==--
+    EOT
+  ) : null
+
   metadata_options {
-    http_tokens                 = "required" 
-    http_put_response_hop_limit = 2  
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 2
   }
 
   block_device_mappings {

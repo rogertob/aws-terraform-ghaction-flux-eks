@@ -17,6 +17,9 @@ spec:
     - tags:
         aws:eks:cluster-name: eks-poc-dev
 
+  kubelet:
+    maxPods: 110
+
   tags:
     Project: eks-poc
     Environment: dev

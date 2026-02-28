@@ -50,6 +50,7 @@ variable "node_groups" {
     max_size       = number
     desired_size   = number
     disk_size      = optional(number, 20)
+    max_pods       = optional(number, null)
     labels         = optional(map(string), {})
     taints = optional(list(object({
       key    = string
