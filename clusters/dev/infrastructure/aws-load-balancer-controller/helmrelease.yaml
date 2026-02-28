@@ -23,6 +23,13 @@ spec:
 
     replicaCount: 1
 
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+
+    nodeSelector:
+      node-role: system
+
     resources:
       requests:
         cpu: 100m
