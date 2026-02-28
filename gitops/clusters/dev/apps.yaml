@@ -8,7 +8,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./clusters/dev/apps
+  path: ./gitops/clusters/dev/apps
   prune: true
   wait: true
   timeout: 5m
