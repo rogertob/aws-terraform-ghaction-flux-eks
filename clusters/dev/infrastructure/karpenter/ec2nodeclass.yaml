@@ -1,0 +1,23 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  role: eks-poc-dev-karpenter-node
+
+  amiSelectorTerms:
+    - alias: al2023@latest
+
+  subnetSelectorTerms:
+    - tags:
+        kubernetes.io/cluster/eks-poc-dev: "shared"
+        kubernetes.io/role/internal-elb: "1"
+
+  securityGroupSelectorTerms:
+    - tags:
+        aws:eks:cluster-name: eks-poc-dev
+
+  tags:
+    Project: eks-poc
+    Environment: dev
+    ManagedBy: karpenter
