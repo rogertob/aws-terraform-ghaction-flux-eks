@@ -15,12 +15,20 @@ module "eks" {
   public_access_cidrs     = ["0.0.0.0/0"]
 
   node_groups = {
-    general = {
+    system = {
       instance_types = ["t3.medium"]
       min_size       = 0
       max_size       = 3
-      desired_size   = 1
-      disk_size      = 50
+      desired_size   = 0
+      disk_size      = 20
+      labels = {
+        "node-role" = "system"
+      }
+      taints = [{
+        key    = "CriticalAddonsOnly"
+        value  = "true"
+        effect = "NO_SCHEDULE"
+      }]
     }
   }
 
