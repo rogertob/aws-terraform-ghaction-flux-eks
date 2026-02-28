@@ -15,10 +15,18 @@ spec:
         namespace: flux-system
       interval: 12h
   values:
-    clusterName: eks-poc-dev   
+    clusterName: eks-poc-dev
 
     serviceAccount:
       create: true
       name: aws-load-balancer-controller
 
     replicaCount: 1
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
