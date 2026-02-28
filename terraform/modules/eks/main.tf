@@ -56,6 +56,10 @@ resource "aws_eks_cluster" "this" {
     aws_cloudwatch_log_group.cluster,
   ]
 
+  lifecycle {
+    ignore_changes = [access_config]
+  }
+
   tags = merge(var.tags, {
     Name = var.cluster_name
   })
