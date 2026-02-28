@@ -71,7 +71,7 @@ variable "node_groups" {
 variable "cluster_log_types" {
   description = "EKS control plane log types to enable"
   type        = list(string)
-  # "api", "audit", "authenticator", "controllerManager", "scheduler"
+  default=  ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
 }
 
