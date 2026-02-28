@@ -45,6 +45,10 @@ resource "aws_eks_cluster" "this" {
     resources = ["secrets"]
   }
 
+  access_config {
+    authentication_mode = "API_AND_CONFIG_MAP"
+  }
+
   enabled_cluster_log_types = var.cluster_log_types
 
   depends_on = [
