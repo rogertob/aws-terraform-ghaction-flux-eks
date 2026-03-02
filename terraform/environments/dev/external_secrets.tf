@@ -32,9 +32,10 @@ module "external_secrets_pod_identity" {
 
 # Grafana admin credentials
 resource "aws_secretsmanager_secret" "grafana_admin" {
-  name        = "${local.name}/grafana-admin"
-  description = "Grafana admin credentials"
-  tags        = local.tags
+  name                    = "${local.name}/grafana-admin"
+  description             = "Grafana admin credentials"
+  recovery_window_in_days = 0
+  tags                    = local.tags
 }
 
 resource "aws_secretsmanager_secret_version" "grafana_admin" {
