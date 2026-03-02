@@ -19,7 +19,7 @@ module "eks" {
       instance_types = ["t3.medium"]
       min_size       = 0
       max_size       = 3
-      desired_size   = 0
+      desired_size   = 1
       disk_size      = 20
       max_pods       = 110
       labels = {
@@ -38,6 +38,25 @@ module "eks" {
 
 data "aws_eks_cluster_auth" "this" {
   name = module.eks.cluster_name
+}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_iam_session_context" "current" {
+  arn = data.aws_caller_identity.current.arn
+}
+
+module "cluster_admin_self" {
+  source = "../../modules/access-entry"
+
+  cluster_name  = module.eks.cluster_name
+  principal_arn     = data.aws_iam_session_context.current.issuer_arn
+  entry_type        = "STANDARD"
+  access_scope_type = "cluster"
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  tags          = local.tags
+
+  depends_on = [module.eks]
 }
 
 # Managed Addons
