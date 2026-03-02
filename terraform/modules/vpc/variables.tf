@@ -6,7 +6,6 @@ variable "name" {
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
-  default     = "10.0.0.0/16"
 }
 
 variable "azs" {
@@ -32,7 +31,6 @@ variable "cluster_name" {
 variable "single_nat_gateway" {
   description = "Use a single NAT gateway"
   type        = bool
-  default     = false
 }
 
 variable "tags" {

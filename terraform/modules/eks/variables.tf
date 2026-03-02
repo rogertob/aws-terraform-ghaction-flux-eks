@@ -6,7 +6,6 @@ variable "cluster_name" {
 variable "cluster_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "1.31"
 }
 
 variable "vpc_id" {
@@ -28,13 +27,11 @@ variable "public_subnet_ids" {
 variable "endpoint_public_access" {
   description = "Enable public access to the Kubernetes API server"
   type        = bool
-  default     = true
 }
 
 variable "endpoint_private_access" {
   description = "Enable private access to the Kubernetes API server from within the VPC"
   type        = bool
-  default     = true
 }
 
 variable "public_access_cidrs" {
@@ -58,22 +55,11 @@ variable "node_groups" {
       effect = string
     })), [])
   }))
-  default = {
-    general = {
-      instance_types = ["t3.medium"]
-      min_size       = 0
-      max_size       = 3
-      desired_size   = 1
-      disk_size      = 20
-    }
-  }
 }
 
 variable "cluster_log_types" {
   description = "EKS control plane log types to enable"
   type        = list(string)
-  default=  ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-
 }
 
 variable "log_retention_days" {
