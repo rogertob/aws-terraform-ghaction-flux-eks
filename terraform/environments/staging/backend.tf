@@ -24,10 +24,9 @@ terraform {
     }
   }
 
-  # backend "s3" {
-  #   bucket         = "bucket-name"
-  #   key            = "staging/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   encrypt        = true
-  # }
+  backend "s3" {
+    bucket         = "mgmnt-pocs-022826"
+    key            = "staging/terraform.tfstate"
+    region         = "us-east-1"
+  }
 }
