@@ -49,6 +49,10 @@ resource "aws_eks_cluster" "this" {
     authentication_mode = "API_AND_CONFIG_MAP"
   }
 
+  upgrade_policy {
+    support_type = "STANDARD"
+  }
+
   enabled_cluster_log_types = var.cluster_log_types
 
   depends_on = [
