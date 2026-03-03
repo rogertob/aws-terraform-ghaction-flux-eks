@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: hello-service
+  namespace: flux-system
+spec:
+  type: oci
+  url: oci://ghcr.io/rogertob/charts
+  interval: 5m
