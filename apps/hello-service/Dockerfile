@@ -6,10 +6,6 @@ RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 FROM python:3.12-slim
 WORKDIR /app
 
-# rootfs read-only 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
 COPY --from=builder /install /usr/local
 COPY app/ .
 
