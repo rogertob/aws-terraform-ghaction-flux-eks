@@ -57,13 +57,13 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # - name: Install Helm
-      #   if: github.event_name != 'pull_request'
-      #   uses: azure/setup-helm@v4
+      - name: Install Helm
+        if: github.event_name != 'pull_request'
+        uses: azure/setup-helm@v4
 
-      # - name: Package and push Helm chart
-      #   if: github.event_name != 'pull_request'
-      #   run: |
-      #     CHART_VERSION="0.1.0-$(git rev-parse --short HEAD)"
-      #     helm package charts/hello-service --version "$CHART_VERSION"
-      #     helm push hello-service-*.tgz ${{ env.CHART_REGISTRY }}
+      - name: Package and push Helm chart
+        if: github.event_name != 'pull_request'
+        run: |
+          CHART_VERSION="0.1.0-$(git rev-parse --short HEAD)"
+          helm package charts/hello-service --version "$CHART_VERSION"
+          helm push hello-service-*.tgz ${{ env.CHART_REGISTRY }}
