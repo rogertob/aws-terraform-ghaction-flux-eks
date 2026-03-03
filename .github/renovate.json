@@ -8,8 +8,9 @@
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dependency Dashboard",
 
-  "schedule": ["before 1am on weekdays"],
+  "schedule": ["before 1am every weekday"],
   "timezone": "America/New_York",
+  "gitAuthor": "Renovate Bot <renovate-bot@users.noreply.github.com>",
 
   "prHourlyLimit": 2,
   "prConcurrentLimit": 5,
@@ -26,8 +27,7 @@
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "GitHub Actions",
-      "automerge": true,
-      "platformAutomerge": true
+      "automerge": true
     },
     {
       "description": "GitHub Actions major versions require manual review",

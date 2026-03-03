@@ -9,6 +9,8 @@ on:
 jobs:
   renovate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,3 +21,4 @@ jobs:
           configurationFile: .github/renovate.json
         env:
           RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
