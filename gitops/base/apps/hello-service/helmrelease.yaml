@@ -9,7 +9,7 @@ spec:
     spec:
       chart: hello-service
       # Flux will upgrade automatically when a new chart version is pushed
-      version: ">=0.1.0"
+      version: ">=0.1.0-0"
       sourceRef:
         kind: HelmRepository
         name: hello-service
