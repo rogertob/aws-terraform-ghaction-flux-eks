@@ -4,7 +4,7 @@ metadata:
   name: hello-service
   namespace: api
 spec:
-  interval: 10m
+  interval: 1m
   chart:
     spec:
       chart: hello-service
