@@ -1,0 +1,61 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits"
+  ],
+
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dependency Dashboard",
+
+  "schedule": ["before 9am on weekdays"],
+  "timezone": "UTC",
+
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+
+  "labels": ["dependencies"],
+
+  "ignorePaths": [
+    "gitops/base/apps/hello-service/helmrelease.yaml"
+  ],
+
+  "packageRules": [
+    {
+      "description": "Group and automerge GitHub Actions minor + patch updates",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "GitHub Actions",
+      "automerge": true,
+      "platformAutomerge": true
+    },
+    {
+      "description": "GitHub Actions major versions require manual review",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "breaking-change"],
+      "automerge": false
+    },
+    {
+      "description": "Group Grafana observability stack (loki + promtail share the same Helm repo)",
+      "matchManagers": ["flux"],
+      "matchPackageNames": ["loki", "promtail"],
+      "groupName": "Grafana stack",
+      "labels": ["dependencies", "helm", "observability"]
+    },
+    {
+      "description": "All infrastructure Helm charts require human review — never automerge",
+      "matchManagers": ["flux"],
+      "matchFileNames": ["gitops/base/infrastructure/**"],
+      "labels": ["dependencies", "helm"],
+      "automerge": false
+    },
+    {
+      "description": "Major version bumps get a breaking-change label and lower priority",
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "breaking-change"],
+      "automerge": false,
+      "prPriority": -1
+    }
+  ]
+}
