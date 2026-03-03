@@ -112,8 +112,8 @@ module "addon_coredns" {
   configuration_values = jsonencode({
     replicaCount = 1
   })
-  tags         = local.tags
-  depends_on   = [module.eks]
+  tags       = local.tags
+  depends_on = [module.eks]
 }
 
 module "addon_kube_proxy" {

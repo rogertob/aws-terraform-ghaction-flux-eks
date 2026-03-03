@@ -32,7 +32,7 @@ resource "aws_eks_cluster" "this" {
   role_arn = aws_iam_role.cluster.arn
 
   vpc_config {
-    subnet_ids              = concat(var.private_subnet_ids, var.public_subnet_ids)
+    subnet_ids              = var.private_subnet_ids
     endpoint_public_access  = var.endpoint_public_access
     endpoint_private_access = var.endpoint_private_access
     public_access_cidrs     = var.public_access_cidrs
