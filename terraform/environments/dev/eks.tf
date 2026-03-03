@@ -49,12 +49,12 @@ data "aws_iam_session_context" "current" {
 module "cluster_admin_self" {
   source = "../../modules/access-entry"
 
-  cluster_name  = module.eks.cluster_name
+  cluster_name      = module.eks.cluster_name
   principal_arn     = data.aws_iam_session_context.current.issuer_arn
   entry_type        = "STANDARD"
   access_scope_type = "cluster"
-  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-  tags          = local.tags
+  policy_arn        = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  tags              = local.tags
 
   depends_on = [module.eks]
 }
@@ -109,6 +109,9 @@ module "addon_coredns" {
   source       = "../../modules/eks-addon"
   cluster_name = module.eks.cluster_name
   addon_name   = "coredns"
+  configuration_values = jsonencode({
+    replicaCount = 1
+  })
   tags         = local.tags
   depends_on   = [module.eks]
 }
@@ -119,6 +122,17 @@ module "addon_kube_proxy" {
   addon_name   = "kube-proxy"
   tags         = local.tags
   depends_on   = [module.eks]
+}
+
+module "addon_metrics_server" {
+  source       = "../../modules/eks-addon"
+  cluster_name = module.eks.cluster_name
+  addon_name   = "metrics-server"
+  configuration_values = jsonencode({
+    replicas = 1
+  })
+  tags       = local.tags
+  depends_on = [module.eks]
 }
 
 # EBS CSI 

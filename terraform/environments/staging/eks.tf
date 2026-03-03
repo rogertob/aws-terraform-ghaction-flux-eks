@@ -121,6 +121,17 @@ module "addon_kube_proxy" {
   depends_on   = [module.eks]
 }
 
+module "addon_metrics_server" {
+  source       = "../../modules/eks-addon"
+  cluster_name = module.eks.cluster_name
+  addon_name   = "metrics-server"
+  configuration_values = jsonencode({
+    replicaCount = 1
+  })
+  tags       = local.tags
+  depends_on = [module.eks]
+}
+
 # EBS CSI 
 resource "aws_iam_role" "ebs_csi" {
   name = "${local.name}-ebs-csi"
