@@ -8,8 +8,8 @@
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dependency Dashboard",
 
-  "schedule": ["before 9am on weekdays"],
-  "timezone": "UTC",
+  "schedule": ["before 1am on weekdays"],
+  "timezone": "America/New_York",
 
   "prHourlyLimit": 2,
   "prConcurrentLimit": 5,
