@@ -88,7 +88,7 @@ Flux will reconcile within a few minutes and deploy everything else automaticall
 │       └── staging/          # Staging-specific Flux config and overrides
 │
 ├── apps/
-│   └── hello-service/        # Sample Go app
+│   └── hello-service/        # Sample Python app
 │
 ├── charts/
 │   └── hello-service/        # Helm chart for hello-service
